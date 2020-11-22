@@ -184,3 +184,92 @@ projectData["intelligence"]= data.intelligence;
 ```
 
 Notice that we **manually set the string for the key of the new JS object entry as "intelligence"**, and then to access the property we want to set as its value we use `data.intelligence`. For more on JS dot notation see the MDN Web Docs entry on Property accessors.
+
+
+# Async Promises
+You can think of Promises as a special function that either satisfy (resolve) or fail (reject) to execute a task, and then executes the corresponding actions, usually another task with the returned data in the case of 'resolved' and usually throw an error in the case of 'reject'.
+
+#### Basic Promise Syntax:
+
+```
+const promise = new Promise(function(resolve, reject) {
+  // do a thing, possibly async, then…
+
+  if (/* everything turned out fine */) {
+    resolve("Stuff worked!");
+  }
+  else {
+    reject(Error("It broke"));
+  }
+});
+```
+
+Now however, with the addition of native async functions to JavaScript, we can easily apply the async keywords to a Promise to execute asynchronous JavaScript code.
+
+#### Example 1 - Using Async Fetch
+To make a `fetch()` call, or any other methods inside of a function, asynchronous we must use the keywords provided by JavaScript. Here is an example of an asynchronous fetch function using JavaScript keywords:
+
+```
+const postData = async ( url = '', data = {})=>{
+
+      const response = await fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      credentials: 'same-origin', 
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data), // body data type must match "Content-Type" header        
+    });
+
+      try {
+        const newData = await response.json();
+               return newData
+      }catch(error) {
+      console.log("error", error);
+      // appropriately handle the error
+      }
+  }
+
+  postData('/addMovie', {movie:' the matrix', score: 5})
+  ```
+
+  **postData is an async arrow function that is called with parameters on the last line of code. It is asynchronous because of the keyword async placed before its parameters.**
+
+  **Once you mark a function as `async` you have access to the keywords `await`, `try`, and `catch`.**
+
+In this case `if` and `else` are replaced with `try` and `catch`.
+
+The `await` keyword is used in places where the next actions requires data from the current action so we want to tell our program to wait until the data has been received before continuing with the next steps.
+
+![Async Await Diagram](./assets/async-await.png)
+
+
+#### Example 2 - Adding Fetch
+Here is the client side code that would make a GET request to the animal info API:
+
+```
+let baseURL = 'http://api.animalinfo.org/data/?animal='
+let apiKey = '&appid=9f15e45060...';
+
+document.getElementById('generate').addEventListener('click', performAction);
+
+function performAction(e){
+const newAnimal =  document.getElementById('animal').value;
+getAnimal(baseURL,newAnimal, apiKey)
+
+}
+const getAnimal = async (baseURL, animal, key)=>{
+
+  const res = await fetch(baseURL+animal+key)
+  try {
+
+    const data = await res.json();
+    console.log(data)
+    return data;
+  }  catch(error) {
+    console.log("error", error);
+    // appropriately handle the error
+  }
+}
+```
+
