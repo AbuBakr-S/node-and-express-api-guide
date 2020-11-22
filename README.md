@@ -241,7 +241,7 @@ In this case `if` and `else` are replaced with `try` and `catch`.
 
 The `await` keyword is used in places where the next actions requires data from the current action so we want to tell our program to wait until the data has been received before continuing with the next steps.
 
-![Async Await Diagram](./assets/async-await.png)
+![Async Await Diagram](/assets/async-await.png)
 
 
 #### Example 2 - Adding Fetch
