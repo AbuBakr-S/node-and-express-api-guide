@@ -3,13 +3,12 @@
 const baseURL = 'http://api.geonames.org/search?name='; 
 const apiKey = '&maxRows=1&type=json&maxRows=10&username=as20';  
 
-// Retrieve the user inputted place name
-const placeName = document.getElementById('city').value;
-
 //  Make a GET request on click
 document.getElementById('search').addEventListener('click', performAction);
 
 function performAction(e){
+  // Retrieve the user inputted place name after the user clicks the search button
+  let placeName = document.getElementById('city').value;
   getPlaceName(baseURL, placeName, apiKey)
 }
 
@@ -19,6 +18,9 @@ const getPlaceName = async(baseURL, placeName, apiKey) => {
   try {
     const data = await res.json();
     console.log(data.geonames[0]);
+    console.log(`Latitude: ${data.geonames[0].lat}`);
+    console.log(`Longitude: ${data.geonames[0].lng}`);
+    console.log(`Country Name: ${data.geonames[0].countryName}`);
   } catch(error) {
     console.log("error", error);
   }
