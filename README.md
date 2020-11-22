@@ -157,3 +157,31 @@ const postData = async ( url = '', data = {})=>{
 
 postData('/add', {answer:42});
 ```
+
+## Processing the POST Request
+Back on the server side code we should now be able to receive the data `answer:42`. Remember in the last example, **we attached our data to the body of our POST request**, so to receive that data and make it actionable we can use `request.body`.
+
+Here is an example where we set a variable named data to hold the value of `request.body`, and then print `data` to see what we received.
+
+```
+app.post('/add', function (request, response) {
+    let data = request.body;
+    console.log(data);
+});
+```
+
+The output of this would display in ther terminal: `{answer:42}`
+
+But we don't just want to see the data we received, to complete our POST request we must assign the data we received to our project endpoint, the JS object in our server code named `projectData`. We can simply make a new entry in our JS object using the syntax:
+
+`projectData["x"] = y`
+
+This code would create a new entry in our JS object API endpoint where the value of a string "x" is y. So if the data received from the POST request was `{intelligence:100}`, we could create a new entry in our endpoint with the code: 
+
+```
+let data = request.body; 
+projectData["intelligence"]= data.intelligence;
+```
+
+Notice that we **manually set the string for the key of the new JS object entry as "intelligence"**, and then to access the property we want to set as its value we use `data.intelligence`. For more on JS dot notation see the MDN Web Docs entry on Property accessors.
+
