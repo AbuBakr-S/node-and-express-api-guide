@@ -1,3 +1,30 @@
+// Build dynamic URL query by joining variables
+// q = Place Name
+const baseURL = 'http://api.geonames.org/search?name='; 
+const apiKey = '&maxRows=1&type=json&maxRows=10&username=as20';  
+
+// Retrieve the user inputted place name
+const placeName = document.getElementById('city').value;
+
+//  Make a GET request on click
+document.getElementById('search').addEventListener('click', performAction);
+
+function performAction(e){
+  getPlaceName(baseURL, placeName, apiKey)
+}
+
+// GET Request
+const getPlaceName = async(baseURL, placeName, apiKey) => {
+  const res = await fetch(baseURL+placeName+apiKey)
+  try {
+    const data = await res.json();
+    console.log(data.geonames[0]);
+  } catch(error) {
+    console.log("error", error);
+  }
+}
+
+/*
 // Async function
 const postData = async ( url = '', data = {})=>{
     console.log(data);
@@ -26,3 +53,4 @@ postData('/addMOvie', {movie: 'Black Panther', score: 3});
 postData('/addMOvie', {movie: 'Jumanji', score: 4});
 postData('/addMOvie', {movie: 'Hot Fuzz', score: 1});
 postData('/addMOvie', {movie: 'Avengers', score: 3});
+*/
