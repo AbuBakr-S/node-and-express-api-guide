@@ -184,4 +184,3 @@ projectData["intelligence"]= data.intelligence;
 ```
 
 Notice that we **manually set the string for the key of the new JS object entry as "intelligence"**, and then to access the property we want to set as its value we use `data.intelligence`. For more on JS dot notation see the MDN Web Docs entry on Property accessors.
-

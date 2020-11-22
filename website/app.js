@@ -23,3 +23,6 @@ const postData = async ( url = '', data = {})=>{
 
 postData('/addMovie', {movie: 'The Dark Knight Rises', score: 5});
 postData('/addMOvie', {movie: 'Black Panther', score: 3});
+postData('/addMOvie', {movie: 'Jumanji', score: 4});
+postData('/addMOvie', {movie: 'Hot Fuzz', score: 1});
+postData('/addMOvie', {movie: 'Avengers', score: 3});

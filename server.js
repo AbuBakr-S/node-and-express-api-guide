@@ -4,7 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser')
 // Cors for cross origin allowance
 const cors = require('cors');
-
+// Display full Object in console
+const util = require('util')
 
 // Start up an instance of app
 const app = express();
@@ -27,11 +28,12 @@ function listening() {
 
 
 // Endpoint
-const data = [];
+const projectMovieData = [];
 // Create post request
-app.post('/addMovie', addMovie);
-// Add movie data from req.body to endpoint
-function addMovie(req, res){
-  console.log(req.body);
-  data.push(req.body)
-}
+app.post('/addMovie', function (req, res){
+  let data = req.body;
+  // Display full Object in console
+  console.log(util.inspect(data));
+  projectMovieData["entry"] = data;
+  console.log(`projectData: ${projectMovieData.entry.movie}`);
+});
