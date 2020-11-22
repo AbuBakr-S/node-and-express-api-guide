@@ -1,7 +1,7 @@
 // Build dynamic URL query by joining variables
 // q = Place Name
 const baseURL = 'http://api.geonames.org/search?name='; 
-const apiKey = '&maxRows=1&type=json&maxRows=10&username=as20';  
+const apiKey = '&maxRows=1&type=json&username=as20';  
 
 //  Make a GET request on click
 document.getElementById('search').addEventListener('click', performAction);
